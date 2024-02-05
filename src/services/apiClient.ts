@@ -1,9 +1,4 @@
-import axios from "axios";
-
-interface PageParams {
-  pageNumber: any;
-  pageSize: number;
-}
+import axios, { AxiosRequestConfig } from "axios";
 
 const axiosInstance = axios.create({
   baseURL: "https://jsonplaceholder.typicode.com",
@@ -16,16 +11,14 @@ class APIClient<T> {
     this.endpoint = endpoint;
   }
 
-  getAll = (params?: any) => {
+  getAll = (config?: AxiosRequestConfig) => {
     return axiosInstance
-      .get<T[]>(this.endpoint, {
-        params,
-      })
+      .get<T[]>(this.endpoint, config)
       .then((res) => res.data);
   };
 
   //For paginated or infinite queries
-  getPage = ({ pageNumber, pageSize }: PageParams, params?: any) => {
+  /*   getPage = ({ pageNumber, pageSize }: PageParams, params?: any) => {
     return this.getAll({
       params: {
         _start: (pageNumber - 1) * pageSize,
@@ -33,7 +26,7 @@ class APIClient<T> {
         ...params,
       },
     });
-  };
+  }; */
 
   post = (data: T) => {
     return axiosInstance.post<T>(this.endpoint, data).then((res) => res.data);

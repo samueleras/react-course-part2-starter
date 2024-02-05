@@ -10,7 +10,7 @@ const PostList = () => {
     isLoading,
     fetchNextPage,
     isFetchingNextPage,
-  } = usePosts({ pageSize });
+  } = usePosts({ pageSize, userId: null }); //normaly userid would be passed from app for example. And its either null or a id
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error.message}</p>;
