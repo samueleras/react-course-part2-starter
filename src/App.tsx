@@ -1,10 +1,18 @@
 import "./App.css";
-import LoginStatus from "./state-management/LoginStatus";
+import AuthProvider from "./state-management/AuthProvider";
+import HomePage from "./state-management/HomePage";
+import NavBar from "./state-management/NavBar";
+import TasksProvider from "./state-management/TasksProvider";
 
 function App() {
   return (
     <>
-      <LoginStatus />
+      <AuthProvider>
+        <TasksProvider>
+          <NavBar />
+          <HomePage />
+        </TasksProvider>
+      </AuthProvider>
     </>
   );
 }
